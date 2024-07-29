@@ -52,6 +52,7 @@
         margin: 5px 0;
         max-width: 75%;
         align-self: flex-end;
+        word-break: break-word;
       }
       
     .userMessage {
@@ -77,6 +78,7 @@
         color: white;
         word-wrap: break-word;
         display: inline-block;
+        white-space: pre-wrap;
       }
   }
   .textInputBox

@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 function App() {
 
   //const location = useLocation();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{ content: "Hi!\nI'm here to help you establish a complete value prop and create a messaging strategy. Let's work together and within 10 minutes we'll have a complete messaging strategy that you can use in your prospecting strategy. When we're done, you'll have: \n\nA simple elevator pitch to articulate your value prop. \nA more specific industry specific value prop. \nA definition of an ideal cutsomer profile that you can use in linkedin. \nA prospecting message that supports your value prop. \n\nBefore we get started, please pull up a few web pages that describe your company and expertise. We'll need to paste those URLS into one of the prompts.", isUserMessage: false }]);
   const [socket, setSocket] = useState(null);
   const [currentMessage, setCurrentMessage] = useState('');
   //const assistantChoice = new URLSearchParams(location.search).get('assistantChoice');
@@ -91,15 +91,17 @@ function App() {
         </p>
         </div>
         <div className='chatScreen'>
-        {messages.map((message, index) => (
-                <div
-                    key={index}
-                    className={`messageContainer ${message.isUserMessage ? 'userMessage' : 'responseMessage'}`}
-                >
-                <p className="messageText">{message.content}</p>
-                </div>
-                ))}
-        {loading && <div class="loading"></div>}
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`messageContainer ${message.isUserMessage ? 'userMessage' : 'responseMessage'}`}
+            >
+              <pre className="messageText">
+                {message.content}
+              </pre>
+            </div>
+          ))}
+          {loading && <div className="loading"></div>}
         </div>
         <div className='textInputBox'>
           <div class="inputWrapper">
