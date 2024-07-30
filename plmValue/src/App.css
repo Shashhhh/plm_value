@@ -42,7 +42,9 @@
     display: flex;
     flex: 10;
     flex-direction: column;
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     overflow-y: auto;
     padding-right: 10px;
     

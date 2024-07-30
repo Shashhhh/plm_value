@@ -1,16 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import './App.css';
-import { FaArrowUp } from"react-icons/fa6";
+import { FaArrowUp } from "react-icons/fa6";
 import { useLocation } from 'react-router-dom';
-function App() {
+import {createRoot} from 'react-dom/client'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
-  //const location = useLocation();
-  const [messages, setMessages] = useState([{ content: "Hi!\nI'm here to help you establish a complete value prop and create a messaging strategy. Let's work together and within 10 minutes we'll have a complete messaging strategy that you can use in your prospecting strategy. When we're done, you'll have: \n\nA simple elevator pitch to articulate your value prop. \nA more specific industry specific value prop. \nA definition of an ideal cutsomer profile that you can use in linkedin. \nA prospecting message that supports your value prop. \n\nBefore we get started, please pull up a few web pages that describe your company and expertise. We'll need to paste those URLS into one of the prompts.", isUserMessage: false }]);
+function App() {
+  
+  const [messages, setMessages] = useState([{ content: "Hi!\nI'm here to help you establish a complete value prop and create a messaging strategy. Let's work together and within 10 minutes we'll have a complete messaging strategy that you can use in your prospecting strategy. When we're done, you'll have: \n\nA simple elevator pitch to articulate your value prop. \nA more specific industry specific value prop. \nA definition of an ideal customer profile that you can use in LinkedIn. \nA prospecting message that supports your value prop. \n\nBefore we get started, please pull up a few web pages that describe your company and expertise. We'll need to paste those URLs into one of the prompts.", isUserMessage: false }]);
   const [socket, setSocket] = useState(null);
   const [currentMessage, setCurrentMessage] = useState('');
-  //const assistantChoice = new URLSearchParams(location.search).get('assistantChoice');
   const [loading, setLoading] = useState(false);
-  const assistantChoice = "Machinist"
+  const assistantChoice = "Value_prop";
+
   useEffect(() => {
     const ws = new WebSocket(`wss://backend-ckmm.onrender.com/ws/stream/${assistantChoice}/`);
     ws.onopen = () => {
@@ -75,6 +79,7 @@ function App() {
       setCurrentMessage('');
     }
   }, [currentMessage, messages]);
+
   const [input, setInput] = useState('');
   const handleSend = () => {
     if (input.trim() !== '') {
@@ -82,13 +87,12 @@ function App() {
       setInput('');
     }
   };
+
   return (
     <div className="container">
       <div className="chat">
         <div className='pageHeader'>
-        <p>
-          PLM Value Prop Helper
-        </p>
+          <p>PLM Value Prop Helper</p>
         </div>
         <div className='chatScreen'>
           {messages.map((message, index) => (
@@ -96,31 +100,31 @@ function App() {
               key={index}
               className={`messageContainer ${message.isUserMessage ? 'userMessage' : 'responseMessage'}`}
             >
-              <pre className="messageText">
-                {message.content}
-              </pre>
+              <div className="messageText">
+              <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+              </div>
             </div>
           ))}
           {loading && <div className="loading"></div>}
         </div>
         <div className='textInputBox'>
-          <div class="inputWrapper">
+          <div className="inputWrapper">
             <input
-              type="text" 
-              className="textInput" 
-              placeholder="Ask anything" 
+              type="text"
+              className="textInput"
+              placeholder="Ask anything"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleSend();
                 }
-              }}>
-              </input>
-        <button className="sendButton" onClick={handleSend}>
-          <FaArrowUp size={24} color="white" />
-        </button>
-        </div>
+              }}
+            />
+            <button className="sendButton" onClick={handleSend}>
+              <FaArrowUp size={24} color="white" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
