@@ -28,7 +28,7 @@
   {
     display: flex;
     flex: 1;
-    padding-left: 10px;
+    padding-left: 12.5px;
     align-items: center;
     width: 100;
     height: 100;
@@ -42,11 +42,10 @@
     display: flex;
     flex: 10;
     flex-direction: column;
-    margin-top: 10px;
     margin-left: 10px;
-    margin-right: 10px;
     overflow-y: auto;
     padding-right: 10px;
+    scrollbar-color:#888 #3a3a3a;
     
     .messageContainer {
         display: flex;
@@ -95,7 +94,9 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
     .inputWrapper {
       display: flex;
       position: relative;
@@ -146,16 +147,7 @@
   
   }
 }
-.chatScreen::-webkit-scrollbar {
-  width: 10px;
-}
-.chatScreen::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 10px;
-}
-.chatScreen::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
-}
+
 .loading {
   --uib-size: 40px;
   --uib-color: white;
