@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import './App.css';
 import { FaArrowUp } from "react-icons/fa6";
-import { useLocation } from 'react-router-dom';
-import {createRoot} from 'react-dom/client'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 
 function App() {
-  
-  const [messages, setMessages] = useState([{ content: "Hi!\nI'm here to help you establish a complete value prop and create a messaging strategy. Let's work together and within 10 minutes we'll have a complete messaging strategy that you can use in your prospecting strategy. When we're done, you'll have: \n\nA simple elevator pitch to articulate your value prop. \nA more specific industry specific value prop. \nA definition of an ideal customer profile that you can use in LinkedIn. \nA prospecting message that supports your value prop. \n\nBefore we get started, please pull up a few web pages that describe your company and expertise. We'll need to paste those URLs into one of the prompts.", isUserMessage: false }]);
+  const [messages, setMessages] = useState([{ content: `**Hi!**  
+I'm here to help you establish a complete value prop and create a messaging strategy. Let's work together and within 10 minutes we'll have a complete messaging strategy that you can use in your prospecting strategy. When we're done, you'll have:
+* A simple elevator pitch to articulate your value prop.
+* A more specific industry-specific value prop.
+* A definition of an ideal customer profile that you can use in LinkedIn.
+* A prospecting message that supports your value prop.\n
+Before we get started, please pull up a few web pages that describe your company and expertise. We'll need to paste those URLs into one of the prompts.`, isUserMessage: false }]);
   const [socket, setSocket] = useState(null);
   const [currentMessage, setCurrentMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [renderedMessages, setRenderedMessages] = useState([]);
+
   const assistantChoice = "Value_prop";
 
   useEffect(() => {
@@ -23,6 +27,7 @@ function App() {
 
     ws.onmessage = (event) => {
       const responseData = JSON.parse(event.data);
+      console.log('Received WebSocket message:', responseData);
       if (responseData.delta) {
         updateCurrentMessage(responseData.delta);
       } else if (responseData.error) {
@@ -80,6 +85,14 @@ function App() {
     }
   }, [currentMessage, messages]);
 
+  useEffect(() => {
+    const processedMessages = messages.map(message => ({
+      ...message,
+      htmlContent: <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+    }));
+    setRenderedMessages(processedMessages);
+  }, [messages]);
+
   const [input, setInput] = useState('');
   const handleSend = () => {
     if (input.trim() !== '') {
@@ -95,13 +108,13 @@ function App() {
           <p>PLM Value Prop Helper</p>
         </div>
         <div className='chatScreen'>
-          {messages.map((message, index) => (
+          {renderedMessages.map((message, index) => (
             <div
               key={index}
               className={`messageContainer ${message.isUserMessage ? 'userMessage' : 'responseMessage'}`}
             >
               <div className="messageText">
-              <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+                {message.htmlContent}
               </div>
             </div>
           ))}
