@@ -82,6 +82,12 @@
         display: inline-block;
         white-space: pre-wrap;
       }
+      .messageText ul {
+        margin-top: -25px;
+        margin-bottom: -25px;
+        padding-left: 20px;
+      }
+      
   }
   .textInputBox
   {
