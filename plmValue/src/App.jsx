@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+
 import './App.css';
 import { FaArrowUp } from "react-icons/fa6";
 
@@ -88,7 +89,7 @@ Before we get started, please pull up a few web pages that describe your company
   useEffect(() => {
     const processedMessages = messages.map(message => ({
       ...message,
-      htmlContent: <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+      htmlContent: <ReactMarkdown remarkPlugins={[remarkGfm]} > {message.content.replace(/<br>/g, '\n')}</ReactMarkdown>
     }));
     setRenderedMessages(processedMessages);
   }, [messages]);
