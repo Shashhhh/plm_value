@@ -80,18 +80,59 @@
         word-wrap: break-word;
         display: inline-block;
         white-space: pre-wrap;
+        margin-top: 10px;
+        margin-bottom: 10px;
       }
-      .messageText ul {
-        margin-top: -25px;
-        margin-bottom: -25px;
-        padding-left: 20px;
+    .messageText h1,
+    .messageText h2,
+    .messageText h3,
+    .messageText h4,
+    .messageText h5,
+    .messageText h6 {
+        margin: 0;
       }
+    .messageText p {
+        margin: 0;
+      }
+      .messageText ul,
+      .messageText ol {
+        margin-top: -20px;
+        margin-bottom: -20px;
+        padding-left: 25px;
+      }
+      .messageText li {
+        margin: 0;
+        padding: 0;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        color: white;
+      }
+      tr:hover td {
+        background-color: #444;
+      }
+      th, td {
+        border: 1px solid #555;
+        padding: 8px;
+        text-align: left;
+      }
+      
+      th {
+        background-color: #333;
+      }
+      
+      td {
+        background-color: #242424;
+      }
+      
+      
       
   }
   .textInputBox
   {
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: center;
     padding-left: 10px;
