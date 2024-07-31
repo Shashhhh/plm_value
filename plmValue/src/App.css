@@ -115,8 +115,11 @@
       }
       th, td {
         border: 1px solid #555;
-        padding: 8px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 2.5px;
         text-align: left;
+        font-size: .75rem;
       }
       
       th {
@@ -125,10 +128,9 @@
       
       td {
         background-color: #242424;
+        word-break: keep-all;
       }
-      
-      
-      
+
   }
   .textInputBox
   {
@@ -178,6 +180,11 @@
         border: none;
         cursor: pointer;
         color: white;
+        .arrowIcon
+        {
+          width: 24px;
+          height: 24px;
+        }
       }
       .sendButton:hover
       {
@@ -226,5 +233,67 @@
   50% {
     transform: scale(1);
     opacity: 0.25;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px)
+{
+  .chat
+  {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    .pageHeader
+    {
+      font-size: 1.25rem;
+    }
+    .chatScreen
+    {
+      flex: 13; 
+
+      .messageContainer {
+        max-width: 90%;
+      }
+    }
+    .textInputBox
+      { 
+        .inputWrapper {
+          .textInput
+          {
+            height: calc(var(--input-height) * 0.85);
+          }
+          .sendButton
+          { 
+            height:calc(var(--button-height) * 0.9);
+            width: calc(var(--button-height) * 0.9);
+            .arrowIcon
+            {
+              width: 21px;
+              height: 21px;
+            }
+          }
+        }
+      }
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px)
+{
+  .chat
+  {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    .pageHeader
+    {
+      font-size: 1.75rem;
+    }
+    .chatScreen
+    {
+      flex: 17; 
+      .messageContainer {
+        max-width: 80%;
+      }
+    }
   }
 }

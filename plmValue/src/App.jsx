@@ -135,7 +135,7 @@ Before we get started, please pull up a few web pages that describe your company
               }}
             />
             <button className="sendButton" onClick={handleSend}>
-              <FaArrowUp size={24} color="white" />
+              <FaArrowUp className='arrowIcon' />
             </button>
           </div>
         </div>
