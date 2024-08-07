@@ -1,5 +1,5 @@
 :root {
-  --input-height: 50px;
+  --input-height: 40px;
   --button-height: calc(var(--input-height) * 0.8);
 }
 

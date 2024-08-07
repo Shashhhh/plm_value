@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import './App.css';
@@ -16,6 +16,7 @@ Before we get started, please pull up a few web pages that describe your company
   const [currentMessage, setCurrentMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [renderedMessages, setRenderedMessages] = useState([]);
+  const chatScreenRef = useRef(null);
 
   const assistantChoice = "Value_prop";
 
@@ -93,6 +94,12 @@ Before we get started, please pull up a few web pages that describe your company
     setRenderedMessages(processedMessages);
   }, [messages]);
 
+  useEffect(() => {
+    if (chatScreenRef.current) {
+      chatScreenRef.current.scrollTop = chatScreenRef.current.scrollHeight;
+    }
+  }, [renderedMessages, loading]);
+
   const [input, setInput] = useState('');
   const handleSend = () => {
     if (input.trim() !== '') {
@@ -107,7 +114,7 @@ Before we get started, please pull up a few web pages that describe your company
         <div className='pageHeader'>
           <p>PLM Value Prop Helper</p>
         </div>
-        <div className='chatScreen'>
+        <div className='chatScreen' ref={chatScreenRef}>
           {renderedMessages.map((message, index) => (
             <div
               key={index}
