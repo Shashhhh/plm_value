@@ -93,11 +93,12 @@
       }
     .messageText p {
         margin: 0;
+        line-height: 1.25;
       }
       .messageText ul,
       .messageText ol {
-        margin-top: -20px;
-        margin-bottom: -20px;
+        margin: -10px 0;
+        line-height: 1.25;
         padding-left: 25px;
       }
       .messageText li {
